@@ -130,7 +130,7 @@ a:hover {
   /* Fixa no topo */
   position: fixed;
   /* Suavizar a abertura e fechamento do sidebar */
-  transition: all .5s ease-in-out;
+  transition: all .5s;
   /* Define o tamanho e coloca o sidebar escondido */
   transform: translateX(-30rem);
   width: 30rem;
