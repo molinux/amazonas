@@ -1,0 +1,21 @@
+{
+  "name": "amazonas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/molinux/amazonas",
+  "author": "Molinux <cybercrowbr@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --watch backend --exec babel-node backend/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.0",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "nodemon": "^2.0.4"
+  }
+}
