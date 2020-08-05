@@ -2,6 +2,6 @@
 
 ### Brazilian ecommerce inspired on Amazon
 
-Description and Details comming soon !
+Description and Details coming soon !
 
 </center>
