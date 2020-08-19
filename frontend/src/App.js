@@ -5,6 +5,7 @@ import ProductScreen from './Screens/ProductScreen';
 import CartScreen from './Screens/CartScreen';
 
 import './App.css';
+import SiginScreen from './Screens/SigninScreen';
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
           </div>
           <div className="header-links">
             <a href="cart.html">Cart</a>
-            <a href="signin.html">Sign In</a>
+            <Link to="/signin">Sign In</Link>
           </div>
         </header>
         <aside className="sidebar">
@@ -46,6 +47,7 @@ function App() {
         <main className="main">
           <div className="content">
             {/* ? = optional */}
+            <Route path="/signin" component={SiginScreen} />
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/" exact={true} component={HomeScreen} />
