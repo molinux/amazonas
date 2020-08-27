@@ -9,6 +9,13 @@ router.get('/', async(req, res) => {
   res.send(products);
 })
 
+router.get('/:id', async(req, res) => {
+  const productId = req.params.id;
+  const product = await Product.findById(productId);
+
+  return res.send(product);
+})
+
 router.put('/:id', isAuth, isAdmin, async (req, res) => {
   const productId = req.params.id;
   const product = await Product.findById(productId)
