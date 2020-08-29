@@ -2,91 +2,131 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
+import CheckoutSteps from '../components/CheckoutSteps';
 
 function PlaceOrderScreen(props) {
 
   const cart = useSelector(state => state.cart);
-  const { cartItems } = cart;
 
-  const productId = props.match.params.id;
-  // http://localhost:3000/cart/1?qty=2 | Number para converter o qty de string para numero
-  const qty = props.location.search ? Number(props.location.search.split("=")[1]):1;
+  const { cartItems, shipping, payment } = cart;
+  // If shipping info are not provided, redirect to shipping page
+  if(!shipping.address) {
+    props.history.push('/shipping');
+    // If the payment method is not selected, redirect to payment page
+  } else if (!payment.paymentMethod) {
+    props.history.push('/payment')
+  }
+
+  // a = acumulator, c = cart item, 0 = default acumulator value
+  const itemsPrice = cartItems.reduce((a, c) => a + c.price*c.qty, 0);
+  // If greater than R$ 100 = free shipping, or else = R$ 10
+  const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  const taxPrice = 0.15 * itemsPrice;
+  const totalPrice = itemsPrice + shippingPrice + taxPrice;
+
   const dispatch = useDispatch();
-  const removeFromCartHandler = (productId) => {
-    dispatch(removeFromCart (productId));
+  
+  const placeOrderHandler = () => {
+    //create an order
   }
 
   useEffect(() => {
-    if(productId) {
-      dispatch(addToCart(productId, qty));
-    }
+    
   }, []);
 
   const checkoutHandler = () => {
     props.history.push('/signin?redirect=shipping');
   }
 
+
   return (
-    <div className="cart">
-      <div className="cart-list">
-        <ul className="cart-list-container">
-          <li>
+    <div>
+      <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
+      <div className="placeorder">
+        <div className="placeorder-info">
+          <div>
             <h3>
-              Shopping Cart
+              Shipping
             </h3>
             <div>
-              Price
+              {cart.shipping.address}, {cart.shipping.city},
+              {cart.shipping.postalCode}, {cart.shipping.country}
             </div>
-          </li>
-          {
-            cartItems.length === 0 ? 
+          </div>
+          <div>
+            <h3>Payment</h3>
             <div>
-              Cart is empty
+              Payment Method: {cart.payment.paymentMethod}
             </div>
-            :
-            cartItems.map( item => 
+          </div>
+          <div>
+
+            <ul className="cart-list-container">
               <li>
-                <div className="cart-image">
-                  <img src={item.image} alt="product" />
-                </div>
-                <div className="cart-name">
-                  <div>
-                    <Link to={'/product/' + item.product }>
-                    {item.name}
-                    </Link>
-                  </div>
-                  <div>
-                    Qty:
-                    <select value={item.qty} onChange={(e) => dispatch(addToCart(item.product, e.target.value))}>
-                      {/* {[...Array(item.countInStock).keys()].map(x =>
-                        <option key={x + 1} value={x + 1}>{x + 1}</option>
-                        )} */}
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                    </select>
-                    <button type="button" className="button" onClick={() => removeFromCartHandler(item.product)}>
-                      Delete
-                    </button>
-                  </div>
-                </div>
-                <div className="cart-price">
-                  R$ {item.price}
+                <h3>
+                  Shopping Cart
+                </h3>
+                <div>
+                  Price
                 </div>
               </li>
-            )
-          }
-        </ul>
-      </div>
-      <div className="cart-action">
-        <h3>
-        Subtotal ({cartItems.reduce((a, c) => a + parseInt(c.qty), 0)} items)
-        :
-        R$ { cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
-        </h3>
-        <button onClick={checkoutHandler} className="button primary full-width" disabled={cartItems.lenght === 0}>
-          Proceed to Checkout
-        </button>
+              {
+                cartItems.length === 0 ? 
+                <div>
+                  Cart is empty
+                </div>
+                :
+                cartItems.map( item => 
+                  <li>
+                    <div className="cart-image">
+                      <img src={item.image} alt="product" />
+                    </div>
+                    <div className="cart-name">
+                      <div>
+                        <Link to={'/product/' + item.product }>
+                        {item.name}
+                        </Link>
+                      </div>
+                      <div>
+                        Qty: {item.qty}
+                      </div>
+                    </div>
+                    <div className="cart-price">
+                      R$ {item.price}
+                    </div>
+                  </li>
+                )
+              }
+            </ul>
+          </div>
+        </div>
+        <div className="placeorder-action">
+          <ul>
+            <li>
+              <button className="button primary full-width" onClick={placeOrderHandler}>Place Order</button>
+            </li>
+            <li>
+              <h3>Order Summary</h3>
+            </li>
+            <li>
+              <div>Items</div>
+              <div>R$ {itemsPrice}</div>
+            </li>
+            <li>
+              <div>Shipping</div>
+              <div>R$ {shippingPrice}</div>
+            </li>
+            <li>
+              <div>Tax</div>
+              <div>R$ {taxPrice}</div>
+            </li>
+            <li>
+              <div>Order Total</div>
+              <div>R$ {totalPrice}</div>
+            </li>
+          </ul>
+          
+        </div>
       </div>
     </div>
   )
