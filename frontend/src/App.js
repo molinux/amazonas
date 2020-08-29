@@ -8,6 +8,8 @@ import ProductsScreen from './Screens/ProductsScreen';
 import CartScreen from './Screens/CartScreen';
 import SigninScreen from './Screens/SigninScreen';
 import RegisterScreen from './Screens/RegisterScreen';
+import ShippingScreen from './Screens/ShippingScreen';
+import PaymentScreen from './Screens/PaymentScreen';
 
 import './App.css';
 
@@ -58,6 +60,8 @@ function App() {
           <div className="content">
             {/* ? = optional */}
             <Route path="/products" component={ProductsScreen} />
+            <Route path="/shipping" component={ShippingScreen} />
+            <Route path="/payment" component={PaymentScreen} />
             <Route path="/signin" component={SigninScreen} />
             <Route path="/register" component={RegisterScreen} />
             <Route path="/product/:id" component={ProductScreen} />
