@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
+
 function PlaceOrderScreen(props) {
 
   const cart = useSelector(state => state.cart);
@@ -11,12 +12,17 @@ function PlaceOrderScreen(props) {
   const { loading, success, error, order } = orderCreate;
 
   const { cartItems, shipping, payment } = cart;
+
   if (!shipping.address) {
     props.history.push("/shipping");
+
   } else if (!payment.paymentMethod) {
     props.history.push("/payment");
   }
+
+
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
+
   const shippingPrice = itemsPrice > 100 ? 0 : 10;
   const taxPrice = 0.15 * itemsPrice;
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
@@ -30,7 +36,9 @@ function PlaceOrderScreen(props) {
       taxPrice, totalPrice
     }));
   }
+
   useEffect(() => {
+
     if (success) {
       props.history.push("/order/" + order._id);
     }
@@ -40,6 +48,7 @@ function PlaceOrderScreen(props) {
   const checkoutHandler = () => {
     props.history.push("/signin?redirect=shipping");
   }
+
 
   return <div>
     <CheckoutSteps step1 step2 step3 step4 ></CheckoutSteps>
@@ -61,6 +70,7 @@ function PlaceOrderScreen(props) {
           </div>
         </div>
         <div>
+          
           <ul className="cart-list-container">
             <li>
               <h3>
