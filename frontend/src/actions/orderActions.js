@@ -24,7 +24,7 @@ const detailsOrder = (orderId) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST, payload: orderId });
     const { userSignin: { userInfo } } = getState();
-    const { data } = await axios.get('/api/orders' + orderId, {
+    const { data } = await axios.get('/api/orders/' + orderId, {
       headers: {
         Authorization: 'Bearer ' + userInfo.token
       }
