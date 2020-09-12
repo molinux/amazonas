@@ -4,6 +4,11 @@ import { isAuth } from '../util';
 
 const router = express.Router();
 
+router.get('/mine', isAuth, async(req, res) => {
+  const orders = Order.find({ user: req.user._id });
+  return res.send(orders);
+});
+
 router.get('/:id', isAuth, async(req, res) => {
   const order = await Order.findOne({ _id: req.params.id});
   if(order) {

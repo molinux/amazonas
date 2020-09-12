@@ -398,3 +398,18 @@ tbody>tr:nth-child(odd) {
 .placeorder-action-payment > div {
   width: 100%;
 }
+
+
+/* Profile */
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-info {
+  flex: 1 130rem;
+}
+
+.profile-orders {
+  flex: 3 1 60rem;
+}
