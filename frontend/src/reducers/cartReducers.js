@@ -9,7 +9,7 @@ function cartReducer(state = { cartItems: [], shipping: {}, payment: {} }, actio
       if(product) {
         return { 
           cartItems:
-           state, cartItems: state.cartItems.map(x => x.product === product.product ? item : x)
+           state.cartItems.map(x => x.product === product.product ? item : x)
           };
       }
       return {...state, cartItems: [...state.cartItems, item] }
