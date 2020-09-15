@@ -46,7 +46,7 @@ function App() {
             }
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
-                <a href="#" className="dropdown">Admin</a>
+                <a href="#">Admin</a>
                 <ul className="dropdown-content">
                   <li>
                     <Link to="/orders">Orders</Link>

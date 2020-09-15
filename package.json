@@ -1,26 +1,27 @@
 {
-  "name": "amazona",
+  "name": "amazonas",
   "version": "1.0.0",
   "description": "Demo : https://amazonaapp.herokuapp.com/",
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.27"
+    "mongoose": "^5.8.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/node": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
+    "nodemon": "^2.0.2",
     "commitizen": "^4.1.2",
-    "cz-conventional-changelog": "3.2.0",
-    "nodemon": "^2.0.2"
+    "cz-conventional-changelog": "3.2.0"
   },
   "scripts": {
-    "start": "nodemon --watch backend --exec babel-node backend/server.js",
+    "start": "nodemon --watch backend -r esm backend/server.js",
     "commit": "yarn git-cz"
   },
   "repository": {

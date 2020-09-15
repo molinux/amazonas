@@ -1,10 +1,10 @@
-import { 
-  ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAIL, 
+import {
+  ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAIL,
   ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_DETAILS_FAIL,
+  ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS, ORDER_PAY_FAIL,
   MY_ORDER_LIST_REQUEST, MY_ORDER_LIST_SUCCESS, MY_ORDER_LIST_FAIL,
-  ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS, ORDER_PAY_FAIL, 
-  ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS, ORDER_LIST_FAIL, 
-  ORDER_DELETE_REQUEST, ORDER_DELETE_SUCCESS, ORDER_DELETE_FAIL
+  ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS, ORDER_LIST_FAIL,
+  ORDER_DELETE_REQUEST, ORDER_DELETE_SUCCESS, ORDER_DELETE_FAIL,
 } from '../constants/orderConstants';
 
 function orderCreateReducer(state = {}, action) {
@@ -18,6 +18,7 @@ function orderCreateReducer(state = {}, action) {
     default: return state;
   }
 }
+
 
 function orderDetailsReducer(state = {
   order: {
@@ -36,6 +37,7 @@ function orderDetailsReducer(state = {
     default: return state;
   }
 }
+
 
 function myOrderListReducer(state = {
   orders: []
@@ -101,4 +103,7 @@ function orderDeleteReducer(state = {
   }
 }
 
-export { orderCreateReducer, orderDetailsReducer, orderPayReducer, myOrderListReducer, orderListReducer, orderDeleteReducer };
+export {
+  orderCreateReducer, orderDetailsReducer,
+  orderPayReducer, myOrderListReducer, orderListReducer, orderDeleteReducer
+};

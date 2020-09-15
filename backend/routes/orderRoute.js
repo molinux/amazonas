@@ -24,7 +24,7 @@ router.get('/:id', isAuth, async(req, res) => {
   }
 })
 
-router.delete('/:id', isAuth, isAadmin, async(req, res) => {
+router.delete('/:id', isAuth, isAdmin, async(req, res) => {
   const order = await Order.findOne({ _id: req.params.id});
   if(order) {
     const deleteOrder = await order.remove();
